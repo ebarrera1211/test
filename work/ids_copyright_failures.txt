@@ -1,4 +1,0 @@
-Copyright header problem in C:/Users/ebarrera/Desktop/TMP/AgesaModulePkg/Debug/AmdIdsDebugPrintDxe/AmdIdsDebugPrintDxe.c
-Copyright header problem in C:/Users/ebarrera/Desktop/TMP/AgesaModulePkg/Debug/AmdIdsDebugPrintDxe/AmdIdsDebugPrintDxe.inf
-Copyright header problem in C:/Users/ebarrera/Desktop/TMP/AgesaModulePkg/Debug/AmdIdsDebugPrintPei/AmdIdsDebugPrintPei.c
-Copyright header problem in C:/Users/ebarrera/Desktop/TMP/AgesaModulePkg/Debug/AmdIdsDebugPrintPei/AmdIdsDebugPrintPei.inf
