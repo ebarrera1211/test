@@ -1,7 +1,5 @@
 """ Remote Command-line Automation helper library"""
 
-import pxssh
-import pexpect
 import os.path
 import os
 import time
