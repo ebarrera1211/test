@@ -32,3 +32,9 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
+class TestCase(models.Model):
+    name = models.TextField(max_length=100)
+    status = models.TextField(max_length=50)
+
+    def __str__(self):
+        return self.name
