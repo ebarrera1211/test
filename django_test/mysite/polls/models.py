@@ -35,6 +35,7 @@ class Choice(models.Model):
 class TestCase(models.Model):
     name = models.TextField(max_length=100)
     status = models.TextField(max_length=50)
+    comment = models.TextField(max_length=250)
 
     def __str__(self):
         return self.name
