@@ -53,7 +53,7 @@ class TestCase(models.Model):
         return self.name
 
 class TestPlan(models.Model):
-    name = models.TextField(max_length=100)
+    name = models.CharField(max_length=50)
     tests = []
 
     def __str__(self):
