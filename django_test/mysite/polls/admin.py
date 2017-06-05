@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from .models import Choice, Question, TestCase
+from .models import Choice, Question, TestCase, TestPlan
 
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 0
-
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -22,5 +21,10 @@ class QuestionAdmin(admin.ModelAdmin):
 class TestCaseAdmin(admin.ModelAdmin):
     model = TestCase
 
+class TestPlanAdmin(admin.ModelAdmin):
+    model = TestPlan
+
+
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(TestCase, TestCaseAdmin)
+admin.site.register(TestPlan, TestPlanAdmin)

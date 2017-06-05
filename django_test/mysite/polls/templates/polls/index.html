@@ -1,13 +1,9 @@
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-
-{% if latest_question_list %}
+{% if testplan_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for testplan in testplan_list %}
+        <li><a href="/polls/{{ testplan.id }}/">{{ testplan.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No Test Plans are available.</p>
 {% endif %}

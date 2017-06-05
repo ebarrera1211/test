@@ -34,8 +34,33 @@ class Choice(models.Model):
 
 class TestCase(models.Model):
     name = models.TextField(max_length=100)
-    status = models.TextField(max_length=50)
-    comment = models.TextField(max_length=250)
+    tester = models.TextField(max_length=50)
+    status_choices = (
+        ('NR', "Not Run"),
+        ('PA', "PASS"),
+        ('FA', "FAIL"),
+        ('BL', "BLOCKED"),
+        ('NI', "Not Implemented")
+    )
+    status = models.CharField(
+        max_length=2,
+        choices=status_choices,
+        default='NR',
+    )
+    comment = models.TextField(max_length=200)
 
     def __str__(self):
         return self.name
+
+class TestPlan(models.Model):
+    name = models.TextField(max_length=100)
+    tests = []
+
+    def __str__(self):
+        return self.name
+
+    def add_test(self, test):
+        self.tests.append(test)
+
+    def remove_test(self, test):
+        self.tests.remove(test)
