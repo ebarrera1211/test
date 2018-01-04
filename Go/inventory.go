@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"net/http"
 
 	"database/sql"
@@ -12,6 +11,7 @@ import (
 
 	"encoding/json"
 	"encoding/xml"
+	"io/ioutil"
 	"net/url"
 )
 
@@ -37,7 +37,6 @@ func main() {
 		if name := r.FormValue("name"); name != "" {
 			p.Name = name
 		}
-
 		p.DBStatus = db.Ping() == nil
 
 		if err := templates.ExecuteTemplate(w, "index.html", p); err != nil {
@@ -70,9 +69,9 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
-		_, err = db.Exec("instert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
-			nil, book.BookData.Title, book.BookData.Author, book.BookData.ID,
-			book.Classification.MostPopular)
+		_, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
+			nil, book.BookData.Title, book.BookData.Author, book.BookData.ID, book.Classification.MostPopular)
+
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
@@ -110,7 +109,7 @@ func find(id string) (ClassifyBookResponse, error) {
 
 func search(query string) ([]SearchResult, error) {
 	var c ClassifySearchResponse
-	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?Summary=true&title=" + url.QueryEscape(query))
+	body, err := classifyAPI("http://classify.oclc.org/classify2/Classify?summary=true&title=" + url.QueryEscape(query))
 
 	if err != nil {
 		return []SearchResult{}, err
