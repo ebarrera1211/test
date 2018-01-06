@@ -16,10 +16,10 @@ import (
 )
 
 type Book struct {
-	PK int
-	Title string
-	Author string
-	Classification string
+  PK int
+  Title string
+  Author string
+  Classification string
 }
 
 type Page struct {
@@ -54,13 +54,13 @@ func main() {
       http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 
-	p := Page{Books: []Book{}}
-	rows, _ := db.Query("select pk,title,author,classification from books")
-	for rows.Next() {
-		var b Book
-		rows.Scan(&b.PK, &b.Title, &b.Author, &b.Classification)
-		p.Books = append(p.Books, b)
-	}
+    p := Page{Books: []Book{}}
+    rows, _ := db.Query("select pk,title,author,classification from books")
+    for rows.Next() {
+      var b Book
+      rows.Scan(&b.PK, &b.Title, &b.Author, &b.Classification)
+      p.Books = append(p.Books, b)
+    }
 
     if err = template.Execute(w, p); err != nil {
       http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -89,23 +89,23 @@ func main() {
       http.Error(w, err.Error(), http.StatusInternalServerError)
     }
 
-    result, err = db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
+    result, err := db.Exec("insert into books (pk, title, author, id, classification) values (?, ?, ?, ?, ?)",
                       nil, book.BookData.Title, book.BookData.Author, book.BookData.ID, book.Classification.MostPopular)
 
     if err != nil {
       http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-	
-	pk, _ := result.LastInsertId()
-	b := Book{
-		PK: int(pk),
-		Title: book.BookData.Title,
-		Author: book.BookData.Author,
-		Classification: book.Classification.MostPopular,
-	}
-	if err := json.NewEncoder(w).Encode(b); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+    }
+
+    pk, _ := result.LastInsertId()
+    b := Book{
+      PK: int(pk),
+      Title: book.BookData.Title,
+      Author: book.BookData.Author,
+      Classification: book.Classification.MostPopular,
+    }
+    if err := json.NewEncoder(w).Encode(b); err != nil {
+      http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
   })
 
   n := negroni.Classic()

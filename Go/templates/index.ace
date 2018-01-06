@@ -6,7 +6,6 @@ html
         background-color: lightgrey;
         cursor: pointer;
       }
-
       #page-switcher {
         width: 100%;
         text-align: center;
@@ -17,12 +16,15 @@ html
         margin: 1em;
         padding: .3em;
       }
+      #search-page {
+        display: none;
+      }
   body
     div#page-switcher
-      button onclick="showViewPage()" View Library
-      button onclick="showSearchPage()" Add Books
+      button#view-library onclick="showViewPage()" View Library
+      button#add-books onclick="showSearchPage()" Add Books
 
-    div#search-page style="display: none;"
+    div#search-page
       form id="search-form" onsubmit="return false"
         input name="search"
         input type="submit" value="Search" onclick="submitSearch()"
@@ -53,13 +55,13 @@ html
 
     script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"
     = javascript
-      function showSearchPage() {
-        $("#search-page").show();
-        $("#view-page").hide();
-      }
       function showViewPage() {
-        $("#search-page").hide();
-        $("#view-page").show();
+        $("#search-page").hide()
+        $("#view-page").show()
+      }
+      function showSearchPage() {
+        $("#search-page").show()
+        $("#view-page").hide()
       }
 
       function submitSearch() {
@@ -80,7 +82,7 @@ html
               row.on("click", function() {
                 $.ajax({
                   url: "/books/add?id=" + result.ID,
-                  method: "GET"
+                  method: "GET",
                   success: function(data) {
                     var book = JSON.parse(data);
                     if (!book) return;
